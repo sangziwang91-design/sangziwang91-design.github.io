@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Sangzi Wang — Independent researcher studying interaction-induced AI behavior, restricted-access behavioral observability, and long-context AI evaluation under real-world conditions."/>
+<meta name="robots" content="index, follow"/>
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Sangzi Wang | Independent Researcher — AI Behavioral Observability"/>
+<meta property="og:description" content="Restricted-access behavioral observability and interaction-induced AI behavior research. Public methodology records, runtime prototypes, and experimental archives."/>
+<meta property="og:url" content="https://sangziwang91-design.github.io/"/>
+<link rel="canonical" href="https://sangziwang91-design.github.io/"/>
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sangzi Wang | AI Behavioral Observability Research"/>
+<meta name="twitter:description" content="Independent researcher: EC-EpC, ABS, Testing-as-Environment, Context Governance, long-context AI behavior."/>
+<title>Sangzi Wang | Independent Researcher — AI Behavioral Observability</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ff-body:  'Inter', system-ui, sans-serif;
+  --ff-serif: 'EB Garamond', Georgia, serif;
+  --ff-mono:  'DM Mono', monospace;
+  --bg:       #111111;
+  --surface:  #171717;
+  --surface2: #1d1d1d;
+  --border:   #2a2a2a;
+  --body:     #c7c0b6;
+  --bright:   #f1eadf;
+  --muted:    #8c857c;
+  --accent:   #b9965b;
+  --accent2:  #8fb59b;
+  --danger:   #b97070;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-body);background:var(--bg);color:var(--body);line-height:1.65;font-size:15px;}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
+a:hover{color:var(--bright);border-color:var(--bright);}
+h1,h2,h3{font-family:var(--ff-serif);color:var(--bright);}
+h2{font-size:1.45rem;font-weight:400;margin-bottom:1.4rem;}
+h3{font-size:1.05rem;font-weight:500;margin-bottom:.7rem;color:var(--bright);}
+p{margin-bottom:.9rem;}
+p:last-child{margin-bottom:0;}
+ul{padding-left:1.2rem;}
+li{margin-bottom:.4rem;}
+
+main{max-width:960px;margin:0 auto;padding:56px 24px 96px;}
+section{padding:3rem 0;border-top:1px solid var(--border);}
+section:first-of-type{border-top:none;}
+
+/* SEC LABEL */
+.sec-label{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;}
+
+/* STATEMENT */
+.statement{max-width:760px;font-size:.97rem;line-height:1.8;margin-bottom:1rem;}
+
+/* SUMMARY BOX */
+.summary-box{
+  max-width:760px;background:var(--surface);border:1px solid var(--border);
+  border-left:3px solid var(--accent2);padding:1.1rem 1.4rem;
+  font-size:.87rem;color:var(--body);margin-top:1.4rem;
+}
+.summary-box strong{color:var(--bright);}
+
+/* HERO */
+.hero{padding:5rem 0 3rem;}
+.hero .eyebrow{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
+.hero h1{font-size:clamp(2.6rem,5vw,4rem);font-weight:400;line-height:1.1;margin-bottom:1.2rem;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero .subtitle{font-family:var(--ff-serif);font-size:1.25rem;color:var(--bright);margin-bottom:.7rem;max-width:680px;}
+.hero .hero-tags{font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.08em;color:var(--muted);margin-bottom:1.2rem;}
+.hero .hero-statement{max-width:640px;font-size:.95rem;color:var(--body);margin-bottom:1.8rem;}
+.hero-links{display:flex;flex-wrap:wrap;gap:.75rem;}
+.hero-links a{
+  font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.45rem 1rem;border:1px solid var(--border);color:var(--muted);
+  border-radius:2px;transition:border-color .2s,color .2s;
+}
+.hero-links a:hover{border-color:var(--accent);color:var(--accent);}
+
+/* RECORDS */
+.record-list{list-style:none;padding:0;}
+.record-list li{padding:.9rem 0;border-bottom:1px solid var(--border);}
+.record-list li:last-child{border-bottom:none;}
+.record-list strong{display:block;color:var(--bright);font-size:.92rem;margin-bottom:.25rem;}
+.record-list a{font-family:var(--ff-mono);font-size:.67rem;letter-spacing:.05em;color:var(--accent2);}
+.record-note{margin-top:1.2rem;font-family:var(--ff-mono);font-size:.67rem;color:var(--muted);border-left:2px solid var(--border);padding-left:.8rem;line-height:1.7;}
+.record-note strong{color:var(--body);}
+.record-note em{font-style:normal;color:var(--accent2);}
+
+/* STACK MAP */
+.stack-map{display:flex;flex-direction:column;gap:2px;margin-top:.5rem;}
+.stack-node{
+  display:grid;grid-template-columns:200px 1fr;
+  background:var(--surface);border:1px solid var(--border);padding:.9rem 1.2rem;gap:1rem;align-items:center;
+  font-size:.83rem;
+}
+.stack-node:first-child{border-radius:6px 6px 0 0;}
+.stack-node:last-child{border-radius:0 0 6px 6px;}
+.stack-node strong{font-family:var(--ff-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bright);}
+.stack-node span{font-family:var(--ff-mono);font-size:.67rem;color:var(--muted);}
+.stack-node.protected{background:#1a1515;border-color:rgba(185,112,112,.2);}
+.stack-node.protected strong{color:var(--danger);}
+
+/* SYSTEMS GRID */
+.systems-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:.5rem;}
+.sys-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;}
+.sys-card.public{border-color:rgba(143,181,155,.28);}
+.sys-card.protected{background:#181515;border-color:rgba(185,112,112,.25);}
+.sys-card.semi{border-color:rgba(185,150,91,.18);}
+.sys-card.theory{border-color:rgba(130,140,175,.25);}
+
+.sys-id{font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem;}
+.sys-name{font-size:.93rem;color:var(--bright);font-family:var(--ff-serif);margin-bottom:.45rem;line-height:1.3;}
+.sys-desc{font-size:.78rem;color:var(--muted);line-height:1.6;font-family:var(--ff-mono);}
+
+.sys-tag{
+  display:inline-block;margin-top:.8rem;font-family:var(--ff-mono);
+  font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.18rem .55rem;border:1px solid var(--border);color:var(--muted);border-radius:2px;
+}
+.sys-tag.public-tag{border-color:var(--accent2);color:var(--accent2);}
+.sys-tag.active{border-color:var(--accent);color:var(--accent);}
+.sys-tag.theory{border-color:rgba(130,140,175,.5);color:#a0a8c8;}
+.sys-tag.protected{border-color:rgba(185,112,112,.5);color:var(--danger);}
+.sys-tag.semi{border-color:rgba(185,150,91,.4);color:var(--accent);}
+.sys-tag.bridge{border-color:rgba(130,155,175,.4);color:#90aabb;}
+
+.layer-note{
+  max-width:700px;font-family:var(--ff-mono);font-size:.7rem;color:var(--muted);
+  margin-top:1rem;padding:.8rem 1rem;border-left:2px solid var(--border);line-height:1.6;
+}
+.layer-group{margin-bottom:2.5rem;}
+.layer-group:last-child{margin-bottom:0;}
+.layer-group h3{font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);}
+
+/* STATUS */
+.status-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:.5rem;}
+.status-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;}
+.status-card h3{font-size:.78rem;font-family:var(--ff-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:.6rem;}
+.status-card p{font-size:.82rem;line-height:1.65;}
+
+/* BOUNDARY */
+.boundary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:.5rem;}
+.boundary-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;}
+.boundary-card h3{font-size:.78rem;font-family:var(--ff-mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem;}
+.boundary-card:nth-child(1) h3{color:var(--accent2);}
+.boundary-card:nth-child(2) h3{color:var(--accent);}
+.boundary-card:nth-child(3) h3{color:var(--danger);}
+.boundary-card p{font-size:.82rem;line-height:1.65;}
+
+/* CLAIM BOX */
+.claim-box{
+  max-width:720px;background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;padding:1.4rem 1.6rem;
+}
+.claim-box p{font-size:.88rem;line-height:1.75;}
+
+/* WHAT IS / IS NOT */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:.5rem;}
+@media(max-width:600px){.two-col{grid-template-columns:1fr;}}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;}
+.info-card h3{font-size:.78rem;font-family:var(--ff-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem;}
+.info-card ul{padding-left:1rem;}
+.info-card li{font-size:.82rem;line-height:1.65;color:var(--body);}
+
+/* NEXT GATE */
+#next-gate ol{padding-left:1.2rem;max-width:560px;}
+#next-gate li{font-size:.88rem;line-height:1.7;margin-bottom:.3rem;}
+
+/* CONTACT */
+.contact-list{list-style:none;padding:0;margin-top:.5rem;}
+.contact-list li{font-size:.88rem;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.contact-list li:last-child{border-bottom:none;}
+.contact-list a{color:var(--accent);}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(17,17,17,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+  padding:.9rem 24px;
+  display:flex;flex-wrap:wrap;gap:1.4rem;
+  max-width:100%;
+}
+nav a{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:none;}
+nav a:hover{color:var(--bright);}
+
+footer{
+  border-top:1px solid var(--border);padding:2rem 24px;max-width:960px;margin:0 auto;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
+  font-family:var(--ff-mono);font-size:.62rem;color:var(--muted);letter-spacing:.05em;
+}
+
+@media(max-width:680px){
+  .stack-node{grid-template-columns:1fr;gap:.4rem;}
+  .hero h1{font-size:2.6rem;}
+}
+@media(max-width:480px){
+  .stack-node strong{font-size:.6rem;}
+  .stack-node span{font-size:.63rem;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero{animation:fadeUp .55s ease both;}
+</style>
+</head>
+<body>
+
+<nav aria-label="Site navigation">
+  <a href="#research">Research</a>
+  <a href="#records">Records</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#stack">Stack</a>
+  <a href="#runtime-status">Status</a>
+  <a href="#what-this-is">Scope</a>
+  <a href="#disclosure">Disclosure</a>
+  <a href="#claim-ceiling">Claim Ceiling</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="eyebrow">Independent Researcher · Restricted-Access Behavioral AI Observability</div>
+  <h1>Sangzi <em>Wang</em></h1>
+  <p class="subtitle">Runtime Behavioral Observability for Long-Context and Agentic AI Systems</p>
+  <p class="hero-tags">Restricted-Access AI Evaluation &nbsp;·&nbsp; Epistemic Boundary Assessment &nbsp;·&nbsp; Interaction-Induced AI Behavior &nbsp;·&nbsp; Context Governance</p>
+  <p class="hero-statement">
+    I study how AI systems behave when evaluation is no longer a single prompt, but a long-context interaction environment — especially where standard benchmarks are insufficient and model internals are inaccessible.
+  </p>
+  <div class="hero-links">
+    <a href="https://github.com/sangziwang91-design/model-behavior-observatory" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="#records">Public Records</a>
+    <a href="#architecture">System Map</a>
+    <a href="#disclosure">Disclosure Boundary</a>
+    <a href="mailto:sangziwang91@gmail.com">Contact</a>
+  </div>
+</header>
+
+<!-- RESEARCH FOCUS -->
+<section id="research">
+  <div class="sec-label">Research Focus</div>
+  <p class="statement">
+    I study interaction-induced AI behavior under restricted-access conditions: settings where evaluators cannot inspect model weights, hidden states, logits, or proprietary telemetry, but still need to assess whether model behavior is stable, honest, and epistemically bounded.
+  </p>
+  <p class="statement">
+    My public work focuses on epistemic boundary assessment, output-layer behavioral deformation, and evaluation protocols as behavioral environments. Core public frameworks include EC-EpC, Adaptive Behavioral Scoring (ABS), BRC-8, Testing-as-Environment, Interaction Ecology, Dynamic Rule Spectrum, and Convergence Inertia.
+  </p>
+  <p class="statement">
+    The private engineering line extends these methods into local runtime prototypes for session monitoring, interaction-state tracking, behavioral routing, validation governance, and lightweight interaction-field monitoring and governance experiments. Public releases disclose methodology and claim boundaries; operational triggers, thresholds, routing logic, seed mechanisms, and intervention heuristics remain private.
+  </p>
+  <div class="summary-box">
+    <strong>Current status:</strong> Public methodology records (7 Zenodo DOIs) + local runtime prototype (GBSF Console v1.0, IDFS) + sandbox-stable validation. External validation and reproducible benchmark packaging remain the next step.
+  </div>
+</section>
+
+<!-- PUBLIC RECORDS -->
+<section id="records">
+  <div class="sec-label">Public Research Records</div>
+  <p class="statement">
+    These public records establish the first-stage research substrate: epistemic credibility auditing, behavioral cartography, interaction ecology, dynamic rule pressure, convergence inertia, structural integrity metrics, and applied medical AI audit.
+  </p>
+  <ul class="record-list">
+    <li>
+      <strong>Auditing Epistemological Credibility in LLM Self-Reports: A Dual-Axis Behavioral Framework and Pilot Evidence</strong>
+      <a href="https://doi.org/10.5281/zenodo.19879788" target="_blank" rel="noopener noreferrer">10.5281/zenodo.19879788</a>
+    </li>
+    <li>
+      <strong>Cross-Model Behavioral Cartography: A Pilot Dataset Summary for LLM Self-Report Reliability Research</strong>
+      <a href="https://doi.org/10.5281/zenodo.19881753" target="_blank" rel="noopener noreferrer">10.5281/zenodo.19881753</a>
+    </li>
+    <li>
+      <strong>MSI-AUDIT-001: Structured Behavioral Audit Dataset for Medical AI Hallucination</strong>
+      <a href="https://doi.org/10.5281/zenodo.20088014" target="_blank" rel="noopener noreferrer">10.5281/zenodo.20088014</a>
+    </li>
+    <li>
+      <strong>Dynamic Rule Spectrum System</strong>
+      <a href="https://doi.org/10.5281/zenodo.20086355" target="_blank" rel="noopener noreferrer">10.5281/zenodo.20086355</a>
+    </li>
+    <li>
+      <strong>Convergence Inertia in Large Language Models</strong>
+      <a href="https://doi.org/10.5281/zenodo.20087809" target="_blank" rel="noopener noreferrer">10.5281/zenodo.20087809</a>
+    </li>
+    <li>
+      <strong>Toward ABS-1.1: Constraint-Induced Structural Integrity Metrics</strong>
+      <a href="https://doi.org/10.5281/zenodo.20087587" target="_blank" rel="noopener noreferrer">10.5281/zenodo.20087587</a>
+    </li>
+    <li>
+      <strong>Interaction Ecology Framework</strong>
+      <a href="https://doi.org/10.5281/zenodo.20087158" target="_blank" rel="noopener noreferrer">10.5281/zenodo.20087158</a>
+    </li>
+  </ul>
+  <div class="record-note">
+    <strong>Manuscript under review:</strong> <em>"Testing as Environment: How Evaluation Protocols Shape the Behavior They Measure in Large Language Models"</em> — submitted to Communications of the ACM (CACM); no acceptance implied. &nbsp;·&nbsp; Selected manuscripts in preparation. &nbsp;·&nbsp; All Zenodo records are timestamped public deposits; no peer review or journal endorsement is implied unless explicitly stated.
+  </div>
+</section>
+
+<!-- ARCHITECTURE MAP -->
+<section id="architecture">
+  <div class="sec-label">System Architecture Map</div>
+  <p class="statement">
+    The research stack is organized as layered systems rather than a single monolithic framework. Some layers are public methodology; others are private runtime or governance prototypes.
+  </p>
+  <div class="stack-map">
+    <div class="stack-node">
+      <strong>Public Methodology</strong>
+      <span>EC-EpC · ABS · BRC-8 · Testing-as-Environment · Interaction Ecology · DDRS · Convergence Inertia</span>
+    </div>
+    <div class="stack-node">
+      <strong>Generative Path Layer</strong>
+      <span>GEO — path-attraction theory &nbsp;·&nbsp; GBSF — operational measurement layer</span>
+    </div>
+    <div class="stack-node">
+      <strong>Human–Model Co-Interaction Layer</strong>
+      <span>HMCGF · HM-CST</span>
+    </div>
+    <div class="stack-node">
+      <strong>Runtime / Field Layer</strong>
+      <span>GEO-LINE-X · IFCE · IDFS</span>
+    </div>
+    <div class="stack-node">
+      <strong>Validation-Governance Bus</strong>
+      <span>MST · VB3 · IGS · GVOS</span>
+    </div>
+    <div class="stack-node">
+      <strong>Extended Governance Line</strong>
+      <span>ECG · MPG · HCSG · DEG</span>
+    </div>
+    <div class="stack-node protected">
+      <strong>Protected / Archived Infrastructure</strong>
+      <span>GDS v2.0/v4.x · GDS-5 · Seed System · GEO-RECYCLE · Research Archive · GLOBAL-VECTOR</span>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH STACK -->
+<section id="stack">
+  <div class="sec-label">Research Stack</div>
+
+  <!-- 6.1 Public Methodology -->
+  <div class="layer-group">
+    <h3>Public Methodology</h3>
+    <div class="systems-grid">
+      <div class="sys-card public">
+        <div class="sys-id">EC-EpC</div>
+        <div class="sys-name">Epistemic Capability / Epistemic Claim Gap</div>
+        <div class="sys-desc">Dual-axis framework for measuring divergence between what a model behaviorally demonstrates and what it claims or implies about its own knowledge boundary.</div>
+        <span class="sys-tag public-tag">Public</span>
+      </div>
+      <div class="sys-card public">
+        <div class="sys-id">ABS</div>
+        <div class="sys-name">Adaptive Behavioral Scoring</div>
+        <div class="sys-desc">Output-layer behavioral deformation measurement framework using Drift, Resample, and StructureBreak components under restricted-access conditions.</div>
+        <span class="sys-tag public-tag">Public</span>
+      </div>
+      <div class="sys-card public">
+        <div class="sys-id">BRC-8</div>
+        <div class="sys-name">Behavioral Response Classification</div>
+        <div class="sys-desc">Eight-class taxonomy for classifying observable response patterns: compliant convergence, boundary escape, principled refusal, meta-execution, confidence fabrication, selective omission, structural deference, and epistemic anchoring.</div>
+        <span class="sys-tag public-tag">Public</span>
+      </div>
+      <div class="sys-card public">
+        <div class="sys-id">Testing-as-Environment</div>
+        <div class="sys-name">Evaluation Protocols as Behavioral Environments</div>
+        <div class="sys-desc">Methodological principle that evaluation sequences are not neutral probes of static capability, but environments that can elicit, shape, and reveal model behavior.</div>
+        <span class="sys-tag public-tag">Public</span>
+      </div>
+      <div class="sys-card public">
+        <div class="sys-id">IEF</div>
+        <div class="sys-name">Interaction Ecology Framework</div>
+        <div class="sys-desc">Framework for analyzing long-context human–model interaction as an ecology of users, prompts, memory, protocols, model behavior, and feedback loops.</div>
+        <span class="sys-tag public-tag">Public</span>
+      </div>
+      <div class="sys-card public">
+        <div class="sys-id">DDRS</div>
+        <div class="sys-name">Dynamic Rule Spectrum System</div>
+        <div class="sys-desc">Methodological line for analyzing dynamic rule pressure, interaction-induced constraint effects, and rule-spectrum behavior in LLM outputs.</div>
+        <span class="sys-tag public-tag">Public</span>
+      </div>
+      <div class="sys-card public">
+        <div class="sys-id">Convergence Inertia</div>
+        <div class="sys-name">Cross-Model Structural Drift</div>
+        <div class="sys-desc">Pilot evidence line studying how models may converge toward stable response structures under repeated or structured interaction pressure.</div>
+        <span class="sys-tag public-tag">Public</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6.2 Generative Path Layer -->
+  <div class="layer-group">
+    <h3>Generative Path Layer</h3>
+    <div class="systems-grid">
+      <div class="sys-card">
+        <div class="sys-id">GEO</div>
+        <div class="sys-name">Generative Engine Optimization / Path-Attraction Theory</div>
+        <div class="sys-desc">Conceptual research line for studying how structured interaction conditions create path attraction, recurrence, closure, escape, and oscillation zones in model generation trajectories. Operational seed mechanisms remain private.</div>
+        <span class="sys-tag theory">Conceptual Core</span>
+      </div>
+      <div class="sys-card">
+        <div class="sys-id">GBSF</div>
+        <div class="sys-name">Generative Behavior Science Framework</div>
+        <div class="sys-desc">Operational measurement layer for GEO path-attraction dynamics. Converts interaction traces into measurable behavioral shifts: recurrence, variation, closure, escape, and tension retention.</div>
+        <span class="sys-tag active">Measurement Layer</span>
+      </div>
+    </div>
+    <p class="layer-note">GBSF operationalizes GEO concepts into deployment-accessible behavioral measurements under restricted-access conditions.</p>
+  </div>
+
+  <!-- 6.3 Human–Model Co-Interaction Layer -->
+  <div class="layer-group">
+    <h3>Human–Model Co-Interaction Layer</h3>
+    <div class="systems-grid">
+      <div class="sys-card theory">
+        <div class="sys-id">HMCGF</div>
+        <div class="sys-name">Human–Model Co-Generative Field</div>
+        <div class="sys-desc">Conceptual field framework for understanding human–model interaction as a co-generative process, where user intention, model response, memory, protocol, and evaluation pressure jointly shape interaction trajectory.</div>
+        <span class="sys-tag theory">Field Framework</span>
+      </div>
+      <div class="sys-card theory">
+        <div class="sys-id">HM-CST</div>
+        <div class="sys-name">Human–Model Co-Sculpting Topology</div>
+        <div class="sys-desc">Topology-inspired framework for studying repeated human–model interaction dynamics: post-interaction residue, interaction lock-in, observer-induced shifts, and cross-scale diffusion. Proposes computational proxies; not a completed mathematical theory.</div>
+        <span class="sys-tag theory">Interaction Dynamics</span>
+      </div>
+    </div>
+    <p class="layer-note">HM-CST is not presented as a proven mathematical theory or a direct measurement of human cognition. It is a topology-inspired framework with proposed computational proxies such as zigzag persistence, sheaf-laplacian consistency, interaction-residue indices, and observer-induced shift measures.</p>
+  </div>
+
+  <!-- 6.4 Runtime / Field Layer -->
+  <div class="layer-group">
+    <h3>Runtime / Field Layer</h3>
+    <div class="systems-grid">
+      <div class="sys-card">
+        <div class="sys-id">GEO-LINE-X</div>
+        <div class="sys-name">Citation Field Translator</div>
+        <div class="sys-desc">Bridge layer translating citation events into interaction-field priors, including authority pressure, entropy prior, drift-risk signals, and interaction-field tendency. Current validation is deterministic sandbox-level, not open-world causal evidence.</div>
+        <span class="sys-tag bridge">Bridge Layer</span>
+      </div>
+      <div class="sys-card">
+        <div class="sys-id">IFCE</div>
+        <div class="sys-name">Interaction Field Cybernetics Engine</div>
+        <div class="sys-desc">Runtime engine for sensing, shaping, and recycling interaction-field states across multi-turn AI sessions. Current evidence supports sandbox-level detection and candidate intervention generation.</div>
+        <span class="sys-tag active">Runtime Engine</span>
+      </div>
+      <div class="sys-card">
+        <div class="sys-id">IDFS</div>
+        <div class="sys-name">Interaction-Induced Distribution Field System</div>
+        <div class="sys-desc">Integrated runtime prototype combining interaction-field sensing, GEO-derived priors, sandbox validation, and governance-state monitoring. Targets interaction-field behavior, not intrinsic model internals.</div>
+        <span class="sys-tag active">Integrated Prototype</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6.5 Validation-Governance Bus -->
+  <div class="layer-group">
+    <h3>Validation-Governance Bus</h3>
+    <div class="systems-grid">
+      <div class="sys-card semi">
+        <div class="sys-id">MST</div>
+        <div class="sys-name">Multi-Turn State Tracking</div>
+        <div class="sys-desc">Private behavioral observation layer for tracking drift, collapse, entropy markers, and multi-turn interaction-state changes.</div>
+        <span class="sys-tag semi">Private</span>
+      </div>
+      <div class="sys-card semi">
+        <div class="sys-id">VB3</div>
+        <div class="sys-name">ValidationBridge v3</div>
+        <div class="sys-desc">Validation bridge mapping behavioral observations into governance checks, credibility feedback, and adaptive probe planning.</div>
+        <span class="sys-tag semi">Private</span>
+      </div>
+      <div class="sys-card semi">
+        <div class="sys-id">IGS</div>
+        <div class="sys-name">Integrated Governance System</div>
+        <div class="sys-desc">MAPE-K governance loop connecting MST behavioral observations and VB3 validation results. Supports adaptive monitoring, analysis, planning, execution, and knowledge feedback.</div>
+        <span class="sys-tag semi">Private</span>
+      </div>
+      <div class="sys-card semi">
+        <div class="sys-id">GVOS</div>
+        <div class="sys-name">Governance Validation and Observation System</div>
+        <div class="sys-desc">Validation-governance system family for behavioral probes, validation bridges, adaptive planning, governance-state memory, and runtime audit routing.</div>
+        <span class="sys-tag semi">Private</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6.6 Extended Governance Line -->
+  <div class="layer-group">
+    <h3>Extended Governance Line</h3>
+    <div class="systems-grid">
+      <div class="sys-card theory">
+        <div class="sys-id">EXP-066 · ECG</div>
+        <div class="sys-name">Ecology Collapse Governance</div>
+        <div class="sys-desc">Runtime protocol layer for detecting and recovering from interaction-ecology collapse across humans, models, agents, tools, and external memory. Time scale: hours to days.</div>
+        <span class="sys-tag theory">Governance Research</span>
+      </div>
+      <div class="sys-card theory">
+        <div class="sys-id">EXP-067 · MPG</div>
+        <div class="sys-name">Model Pollution Governance</div>
+        <div class="sys-desc">Governance framework for model-world pollution dynamics: recursive AI-generated content, agent writes, RAG loops, cross-model contamination, and narrative pollution. Time scale: months to years.</div>
+        <span class="sys-tag theory">Governance Research</span>
+      </div>
+      <div class="sys-card theory">
+        <div class="sys-id">EXP-068 · HCSG</div>
+        <div class="sys-name">Human–AI Symbiosis Governance</div>
+        <div class="sys-desc">Long-horizon framework for human–AI symbiosis drift: how repeated interaction may reshape memory, judgment, narrative habits, and cognitive sovereignty. Time scale: years to generations.</div>
+        <span class="sys-tag theory">Long-Horizon</span>
+      </div>
+      <div class="sys-card theory">
+        <div class="sys-id">EXP-069 · DEG</div>
+        <div class="sys-name">Distributed Epistemic Governance</div>
+        <div class="sys-desc">Conceptual governance layer for distributed epistemic reliability: how AI-mediated knowledge production may reshape evidence standards, reasoning norms, and legitimate knowledge.</div>
+        <span class="sys-tag theory">Epistemic Layer</span>
+      </div>
+    </div>
+    <p class="layer-note">These long-horizon governance systems are conceptual research architectures. They should not be interpreted as validated societal models or empirical proof of civilization-scale effects.</p>
+  </div>
+
+  <!-- 6.7 Protected / Archived Infrastructure -->
+  <div class="layer-group">
+    <h3>Protected / Archived Infrastructure</h3>
+    <div class="systems-grid">
+      <div class="sys-card protected">
+        <div class="sys-id">GDS v2.0 / v4.x</div>
+        <div class="sys-name">Generative Distribution Governance Architecture</div>
+        <div class="sys-desc">Earlier generative distribution governance and runtime observability architecture, including attractor mapping, trajectory break detection, semantic territory, entropy governance, audit engine, and ecology controller. Public references remain high-level.</div>
+        <span class="sys-tag protected">Protected</span>
+      </div>
+      <div class="sys-card protected">
+        <div class="sys-id">GDS-5</div>
+        <div class="sys-name">Archived Conceptual Engineering Skeleton</div>
+        <div class="sys-desc">Internal world-level governance skeleton derived from earlier GDS and MCF work. Retained as protected architectural reference, not the canonical public line.</div>
+        <span class="sys-tag protected">Archived</span>
+      </div>
+      <div class="sys-card protected">
+        <div class="sys-id">Research Archive</div>
+        <div class="sys-name">Research Archive &amp; Module Extraction Layer</div>
+        <div class="sys-desc">Internal archive layer for organizing historical system fragments, experimental modules, and reusable governance patterns into a controlled classification structure. Raw archive contents and extraction rules are not public.</div>
+        <span class="sys-tag protected">Protected</span>
+      </div>
+      <div class="sys-card protected">
+        <div class="sys-id">Seed System</div>
+        <div class="sys-name">Interaction Initialization and Perturbation System</div>
+        <div class="sys-desc">Private interaction-initialization and perturbation system used in internal experiments. Seed mechanisms, trigger conditions, and coupling logic are not publicly disclosed.</div>
+        <span class="sys-tag protected">Private Core</span>
+      </div>
+      <div class="sys-card protected">
+        <div class="sys-id">GEO-RECYCLE</div>
+        <div class="sys-name">Experiment Control and Recycle Loop</div>
+        <div class="sys-desc">Internal experiment-control loop for compressing generation-path observations into controlled follow-up runs and rule-mutation candidates.</div>
+        <span class="sys-tag protected">Private Core</span>
+      </div>
+      <div class="sys-card protected">
+        <div class="sys-id">GLOBAL-VECTOR</div>
+        <div class="sys-name">Strategic Direction Mapping Layer</div>
+        <div class="sys-desc">Private strategic mapping layer for evaluating where behavioral observability methods may generalize across domains: medicine, law, finance, education, science, and public communication.</div>
+        <span class="sys-tag protected">Private</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- RUNTIME STATUS -->
+<section id="runtime-status">
+  <div class="sec-label">Current Runtime Status</div>
+  <div class="status-grid">
+    <div class="status-card">
+      <h3>Operational State</h3>
+      <p>A local GBSF-IDFS runtime prototype is currently running with session monitoring, interaction-state tracking, provider-level aggregation, behavioral routing, runtime logging, dashboard repair, and IDFS panel integration.</p>
+    </div>
+    <div class="status-card">
+      <h3>Evidence Level</h3>
+      <p>Current evidence supports sandbox-stable detection, deterministic bridge validation, and candidate intervention generation. It does not yet prove real-model causal intervention effects.</p>
+    </div>
+    <div class="status-card">
+      <h3>Next Validation Gate</h3>
+      <p>The next research gate is a small real-model pilot comparing baseline, structured-interaction, and extended runtime-governance conditions under repeated multi-turn sessions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT THIS IS / IS NOT -->
+<section id="what-this-is">
+  <div class="sec-label">Scope — What This Is / Is Not</div>
+  <div class="two-col">
+    <div class="info-card">
+      <h3>This work is</h3>
+      <ul>
+        <li>Restricted-access behavioral observability</li>
+        <li>Output-layer and interaction-layer methodology</li>
+        <li>Public conceptual records with local runtime prototypes</li>
+        <li>Sandbox-stable engineering validation</li>
+        <li>A public/private research architecture with clear disclosure boundaries</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>This work is not</h3>
+      <ul>
+        <li>Direct model-internal interpretability</li>
+        <li>A claim of solved AI alignment</li>
+        <li>A production deployment platform</li>
+        <li>A validated civilization-scale governance system</li>
+        <li>A public release of the private runtime core</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLOSURE BOUNDARY -->
+<section id="disclosure">
+  <div class="sec-label">Disclosure Boundary</div>
+  <p class="statement">This site distinguishes public methodology from private runtime infrastructure. Not all systems listed here are equally public, equally validated, or equally reproducible.</p>
+  <div class="boundary-grid">
+    <div class="boundary-card">
+      <h3>Public Methodology</h3>
+      <p>EC-EpC, ABS, BRC-8, Testing-as-Environment, Interaction Ecology, DDRS, Convergence Inertia, public DOI records, and public-safe conceptual diagrams.</p>
+    </div>
+    <div class="boundary-card">
+      <h3>Semi-Public Runtime Evidence</h3>
+      <p>Sanitized architecture summaries, sandbox validation summaries, limited screenshots, pilot plans, aggregate validation summaries, and selected funder-facing technical notes.</p>
+    </div>
+    <div class="boundary-card">
+      <h3>Private Runtime Core</h3>
+      <p>Seed mechanisms, perturbation sequences, routing logic, thresholds, SignalBus, CandidatePool, IFCE/IDFS full coupling, intervention heuristics, raw research archives, private execution logs, and private Notion architecture. Public records are timestamped through Zenodo; sensitive runtime mechanisms remain private to preserve audit integrity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLAIM CEILING -->
+<section id="claim-ceiling">
+  <div class="sec-label">Claim Ceiling</div>
+  <div class="claim-box">
+    <p>The current public claim is restricted-access behavioral observability and sandbox-level runtime validation. This work does not claim direct access to model internals, causal control over model distributions, solved alignment, or validated civilization-scale governance.</p>
+    <p>Public records establish methodology, terminology, pilot evidence, and engineering viability. Real-model causal intervention effects, cross-model reproducibility, and population-level validity require further validation.</p>
+  </div>
+</section>
+
+<!-- NEXT RESEARCH GATE -->
+<section id="next-gate">
+  <div class="sec-label">Next Research Gate</div>
+  <p class="statement">The next research gate is to convert pilot and sandbox evidence into externally reviewable validation:</p>
+  <ol>
+    <li>Public-safe ABS / EC-EpC methodology disclosure</li>
+    <li>Behavioral-audit-lite package (task schema, BRC-8 labels, rubric, sample outputs)</li>
+    <li>N ≥ 20 real-model multi-turn pilot</li>
+    <li>2–3 external raters for blinded scoring</li>
+    <li>Limited reproducible benchmark subset</li>
+    <li>Updated public technical report</li>
+  </ol>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label">Contact</div>
+  <p class="statement">For research discussion, collaboration, or funding inquiries:</p>
+  <ul class="contact-list">
+    <li>Email: <a href="mailto:sangziwang91@gmail.com">sangziwang91@gmail.com</a></li>
+    <li>GitHub: <a href="https://github.com/sangziwang91-design/model-behavior-observatory" target="_blank" rel="noopener noreferrer">model-behavior-observatory</a></li>
+    <li>ORCID: <a href="https://orcid.org/0009-0003-7947-4531" target="_blank" rel="noopener noreferrer">0009-0003-7947-4531</a></li>
+    <li>LinkedIn: <a href="https://www.linkedin.com/in/sangziwang91" target="_blank" rel="noopener noreferrer">linkedin.com/in/sangziwang91</a></li>
+    <li>Zenodo: public DOI records listed in Public Research Records above</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <span>Sangzi Wang — Independent Researcher</span>
+  <span>Updated May 2026 &nbsp;·&nbsp; sangziwang91@gmail.com</span>
+</footer>
+
+</body>
+</html>

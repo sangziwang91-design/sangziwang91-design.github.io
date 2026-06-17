@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "last_structural_update": "2026-06-17",
+  "public_private_boundary": {
+    "public_allowed": [
+      "method names and high-level definitions",
+      "public DOI records",
+      "public-safe summaries",
+      "claim ceilings",
+      "validation gate design"
+    ],
+    "withheld": [
+      "internal runtime mechanisms",
+      "exact operational triggers",
+      "hidden scoring settings",
+      "private workspace links",
+      "raw private logs",
+      "unpublished experiment details",
+      "private automation chain details"
+    ]
+  },
+  "layers": [
+    {
+      "id": "public-methodology",
+      "title": "Public Methodology",
+      "visibility": "public",
+      "systems": [
+        {
+          "id": "EC-EpC",
+          "name": "Epistemic Capability / Epistemic Claim Gap",
+          "description": "Dual-axis framework for comparing observable behavior with model self-claims about knowledge boundaries.",
+          "status": "public methodology"
+        },
+        {
+          "id": "ABS",
+          "name": "Adaptive Behavioral Scoring",
+          "description": "Restricted-access output-layer behavioral deformation scoring framework.",
+          "status": "public methodology"
+        },
+        {
+          "id": "BRC-8",
+          "name": "Behavioral Response Classification",
+          "description": "Eight-class taxonomy for observable response-pattern classification.",
+          "status": "public taxonomy"
+        },
+        {
+          "id": "Testing-as-Environment",
+          "name": "Evaluation Protocols as Behavioral Environments",
+          "description": "Framing that evaluation sequences can shape the behavior they appear to measure.",
+          "status": "public methodology"
+        },
+        {
+          "id": "IEF",
+          "name": "Interaction Ecology Framework",
+          "description": "Framework for long-context human-model interaction as an ecology of prompts, memory, protocols, behavior, and feedback.",
+          "status": "public methodology"
+        },
+        {
+          "id": "DDRS",
+          "name": "Dynamic Rule Spectrum System",
+          "description": "Methodological line for analyzing dynamic rule pressure and interaction-induced constraint effects.",
+          "status": "public methodology"
+        },
+        {
+          "id": "Convergence Inertia",
+          "name": "Cross-Model Structural Drift",
+          "description": "Pilot evidence line on convergence toward stable response structures under repeated or structured interaction pressure.",
+          "status": "public evidence line"
+        }
+      ]
+    },
+    {
+      "id": "measurement-dataset",
+      "title": "Measurement and Dataset Layer",
+      "visibility": "public / bridge",
+      "systems": [
+        {
+          "id": "GEO-LINE-X",
+          "name": "Cross-Model Behavioral Scoring Dataset",
+          "description": "Dataset for evaluator identity, directive framing, and cross-model behavioral scoring research.",
+          "status": "public dataset"
+        },
+        {
+          "id": "MSI-AUDIT-001",
+          "name": "Medical AI Structured-Illusion Audit Dataset",
+          "description": "Applied structured behavioral audit dataset for medical AI hallucination research.",
+          "status": "public dataset"
+        },
+        {
+          "id": "Cross-Model Behavioral Cartography",
+          "name": "Pilot Dataset Summary",
+          "description": "Pilot dataset summary for model self-report reliability research.",
+          "status": "public dataset summary"
+        }
+      ]
+    },
+    {
+      "id": "runtime-field-layer",
+      "title": "Runtime / Field Layer",
+      "visibility": "semi-public summary",
+      "systems": [
+        {
+          "id": "GBSF",
+          "name": "Generative Behavior Science Framework",
+          "description": "Operational measurement layer for GEO path-attraction dynamics. Public description should stay high-level.",
+          "status": "runtime measurement layer"
+        },
+        {
+          "id": "IFCE",
+          "name": "Interaction Field Cybernetics Engine",
+          "description": "Runtime engine for sensing and recycling interaction-field states. Public claim limited to sandbox-level detection and candidate intervention generation.",
+          "status": "local runtime prototype"
+        },
+        {
+          "id": "IDFS",
+          "name": "Interaction-Induced Distribution Field System",
+          "description": "Integrated prototype combining interaction-field sensing, public-safe priors, sandbox validation, and governance-state monitoring.",
+          "status": "local runtime prototype"
+        }
+      ]
+    },
+    {
+      "id": "validation-governance-bus",
+      "title": "Validation-Governance Bus",
+      "visibility": "private / summarized only",
+      "systems": [
+        {
+          "id": "MST",
+          "name": "Multi-Turn State Tracking",
+          "description": "Private behavioral observation layer for multi-turn interaction-state changes.",
+          "status": "private"
+        },
+        {
+          "id": "VB3",
+          "name": "ValidationBridge v3",
+          "description": "Validation bridge mapping observations into governance checks and adaptive probe planning.",
+          "status": "private"
+        },
+        {
+          "id": "IGS",
+          "name": "Integrated Governance System",
+          "description": "Governance loop connecting behavioral observations and validation results.",
+          "status": "private"
+        },
+        {
+          "id": "GVOS",
+          "name": "Governance Validation and Observation System",
+          "description": "Validation-governance system family for probes, planning, memory, and routing.",
+          "status": "private"
+        }
+      ]
+    },
+    {
+      "id": "protected-core",
+      "title": "Protected / Archived Infrastructure",
+      "visibility": "protected",
+      "systems": [
+        {
+          "id": "Protected initialization layer",
+          "name": "Interaction Initialization and Perturbation System",
+          "description": "Private interaction-initialization and perturbation system. Do not publish mechanisms, triggers, or coupling logic.",
+          "status": "private core"
+        },
+        {
+          "id": "GEO-RECYCLE",
+          "name": "Experiment Control and Recycle Loop",
+          "description": "Internal experiment-control loop. Public references must remain high-level.",
+          "status": "private core"
+        },
+        {
+          "id": "GLOBAL-VECTOR",
+          "name": "Strategic Direction Mapping Layer",
+          "description": "Private strategic mapping layer. Public use limited to sanitized domain-general statements.",
+          "status": "private"
+        }
+      ]
+    }
+  ]
+}

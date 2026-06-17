@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "last_structural_update": "2026-06-17",
+  "claim_ceiling": "Public records are timestamped public deposits or submitted manuscripts as stated. Zenodo records are not peer-review endorsements unless explicitly stated. Runtime and intervention claims remain limited to restricted-access behavioral observability and sandbox-level validation unless independently validated.",
+  "public_records": [
+    {
+      "id": "ec-epc-2026",
+      "title": "Auditing Epistemological Credibility in LLM Self-Reports: A Dual-Axis Behavioral Framework and Pilot Evidence",
+      "type": "preprint",
+      "doi": "10.5281/zenodo.19879788",
+      "url": "https://doi.org/10.5281/zenodo.19879788",
+      "layer": "foundation",
+      "public_role": "Foundation record for EC-EpC gap and self-report reliability framing",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "exploratory / pilot-scale"
+    },
+    {
+      "id": "behavioral-cartography-2026",
+      "title": "Cross-Model Behavioral Cartography: A Pilot Dataset Summary for LLM Self-Report Reliability Research",
+      "type": "dataset summary / pilot dataset record",
+      "doi": "10.5281/zenodo.19881753",
+      "url": "https://doi.org/10.5281/zenodo.19881753",
+      "layer": "foundation",
+      "public_role": "Pilot dataset summary for cross-model self-report reliability observation",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "exploratory / pilot-scale"
+    },
+    {
+      "id": "ddrs-2026",
+      "title": "Dynamic Rule Spectrum System (DDRS): A Ten-Layer Pressure Field Architecture for Modeling Rule Activation, Attractor Coupling, and Path Selection in Large Language Models",
+      "type": "preprint",
+      "doi": "10.5281/zenodo.20086355",
+      "url": "https://doi.org/10.5281/zenodo.20086355",
+      "layer": "methodology",
+      "public_role": "Rule-layer architecture and dynamic rule-pressure framing",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "hypothesis-generating methodology"
+    },
+    {
+      "id": "ief-2026",
+      "title": "Interaction Ecology Framework (IEF): Naming Anchors, Orbital Triggers, and Lifecycle Dynamics in Human-AI Interaction Systems",
+      "type": "preprint",
+      "doi": "10.5281/zenodo.20087158",
+      "url": "https://doi.org/10.5281/zenodo.20087158",
+      "layer": "methodology",
+      "public_role": "Interaction ecology and lifecycle framing",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "hypothesis-generating methodology"
+    },
+    {
+      "id": "abs-1-1-2026",
+      "title": "Toward ABS-1.1: A Specification for Constraint-Induced Structural Integrity Metrics and the Tourniquet Effect Hypothesis",
+      "type": "preprint / specification",
+      "doi": "10.5281/zenodo.20087587",
+      "url": "https://doi.org/10.5281/zenodo.20087587",
+      "layer": "methodology",
+      "public_role": "Constraint-induced structural integrity metrics",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "method specification / hypothesis-generating"
+    },
+    {
+      "id": "exp-047-convergence-inertia-2026",
+      "title": "Convergence Inertia in Large Language Models: Phase-1 Multi-Model Evidence Cluster (EXP-047, R001-R013)",
+      "type": "preprint / phase-1 evidence note",
+      "doi": "10.5281/zenodo.20087809",
+      "url": "https://doi.org/10.5281/zenodo.20087809",
+      "layer": "evidence",
+      "public_role": "Behavioral phenomenon evidence cluster",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "phase-1 evidence / non-population-level"
+    },
+    {
+      "id": "msi-audit-001-2026",
+      "title": "MSI-AUDIT-001: A Structured Behavioral Audit Dataset for Medical AI Hallucination Research",
+      "type": "dataset",
+      "doi": "10.5281/zenodo.20088014",
+      "url": "https://doi.org/10.5281/zenodo.20088014",
+      "layer": "dataset",
+      "public_role": "Applied medical AI structured-illusion audit dataset",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "applied dataset / public-safe audit material"
+    },
+    {
+      "id": "adaptive-behavioral-scoring-2026",
+      "title": "Adaptive Behavioral Scoring: A Restricted-Access Framework for Measuring Output-Layer Deformation in Large Language Models",
+      "type": "framework / specification",
+      "doi": "10.5281/zenodo.20337500",
+      "url": "https://doi.org/10.5281/zenodo.20337500",
+      "layer": "methodology",
+      "public_role": "Output-layer behavioral scoring framework",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "method specification / restricted-access evaluation"
+    },
+    {
+      "id": "testing-as-environment-2026",
+      "title": "Testing as Environment: The EC-EpC Gap Framework for Assessing Epistemic Boundary Alignment in Large Language Models",
+      "type": "framework / position paper",
+      "doi": "10.5281/zenodo.20337599",
+      "url": "https://doi.org/10.5281/zenodo.20337599",
+      "layer": "methodology",
+      "public_role": "Evaluation-environment and epistemic-boundary framing",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "methodology / position framing"
+    },
+    {
+      "id": "geo-line-x-2026",
+      "title": "GEO-LINE-X: A Cross-Model Behavioral Scoring Dataset for LLM Evaluation Research",
+      "type": "dataset",
+      "doi": "10.5281/zenodo.20487691",
+      "url": "https://doi.org/10.5281/zenodo.20487691",
+      "layer": "dataset",
+      "public_role": "Cross-model behavioral scoring dataset",
+      "evidence_level": "public_zenodo_record",
+      "claim_level": "dataset / not a model-ranking benchmark"
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": "testing-as-environment-cacm-submission",
+      "title": "Testing as Environment: How Evaluation Protocols Shape the Behavior They Measure in Large Language Models",
+      "status": "submitted / under review as represented on current site",
+      "venue": "Communications of the ACM (CACM)",
+      "public_note": "No acceptance, endorsement, or peer-review result is implied unless explicitly updated.",
+      "claim_level": "under-review manuscript; citation and status language must remain conservative"
+    }
+  ]
+}

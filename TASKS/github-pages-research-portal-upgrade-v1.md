@@ -1,32 +1,15 @@
-# Codex Task Pack · GitHub Pages Research Portal Upgrade v1.0
+# GitHub Pages Research Portal Upgrade v1.1
 
 ## Scope
 
-Repository: `sangziwang91-design/sangziwang91-design.github.io`  
-Related repository: `sangziwang91-design/model-behavior-observatory`
+Repository: `sangziwang91-design/sangziwang91-design.github.io`
+Related public repository: `sangziwang91-design/model-behavior-observatory`
 
-Goal: upgrade the existing GitHub Pages personal site into a public research portal that links the homepage, GitHub repository, Zenodo records, public-safe evidence packages, and next validation gate.
+Goal: maintain a static GitHub Pages research portal that links the homepage, public repository, Zenodo records, public-safe evidence packages, and calibration-first validation gate.
 
-This is not a product build and not a private-core disclosure task.
-
----
-
-## Current Verified State
-
-- The site is currently a single-page `index.html`.
-- The site already contains navigation for Research, Records, Architecture, Stack, Status, Scope, Disclosure, Claim Ceiling, and Contact.
-- The site already lists 10 Zenodo public records and one manuscript submission-status note.
-- The site already distinguishes public methodology, semi-public runtime evidence, and private runtime core.
-- New starter data files are expected in this upgrade path:
-  - `data/records.json`
-  - `data/systems.json`
-  - `scripts/validate_site_data.py`
-
----
+This is not a product build, not a private-core disclosure task, and not a manuscript-status page.
 
 ## Public Boundary
-
-Do not publish internal mechanisms, exact operational triggers, hidden scoring settings, private workspace links, raw private logs, unpublished experiment details, or private automation chains.
 
 Allowed material:
 
@@ -37,21 +20,34 @@ Allowed material:
 - external validation gate plans
 - repository navigation and public research positioning
 
----
+Withheld material:
+
+- internal mechanisms
+- exact operational triggers
+- hidden scoring settings
+- private workspace links
+- unpublished logs
+- unpublished experiment details
+- private automation chains
+
+No manuscript status is displayed unless the status is current, explicitly authorized for public display, and dated.
 
 ## Execution Order
 
-### Phase 0 — Read and Snapshot
+### Phase 0: Read and Snapshot
 
 1. Read `index.html`.
-2. Read `data/records.json`, `data/systems.json`, and `scripts/validate_site_data.py` if present.
-3. Read related main repository README: `sangziwang91-design/model-behavior-observatory`.
-4. Create a working branch: `site-portal-v1`.
-5. Do not modify protected runtime/private-core content.
+2. Read `data/records.json`, `data/systems.json`, and all scripts under `scripts/`.
+3. Read the related public repository README.
+4. Confirm the working branch and remote state.
+5. Do not modify private-core content or repository visibility.
 
-### Phase 1 — Validate Data Foundation
+### Phase 1: Canonical Data Foundation
 
-Run:
+1. Keep public record metadata in `data/records.json`.
+2. Keep public-safe system map data in `data/systems.json`.
+3. Do not duplicate record lists or system layers manually in `index.html`.
+4. Run:
 
 ```bash
 python scripts/validate_site_data.py
@@ -63,138 +59,119 @@ Expected:
 PASS: site data files are valid.
 ```
 
-If it fails, fix only the data field issue. Do not add private details to satisfy validation.
+### Phase 2: Generated Static Output
 
-### Phase 2 — Refactor Site Without Overbuilding
+Run:
 
-Preferred implementation:
-
-- Keep the site static and GitHub Pages compatible.
-- Keep `index.html` as the public entry.
-- Add modular public data loading only if it remains simple and readable.
-- Do not introduce React/Vite/Next.js unless explicitly approved.
-- Avoid dependencies.
-
-Required sections:
-
-1. Hero
-2. Research Focus
-3. Public Records
-4. Research Stack
-5. Validation Gate
-6. Public Evidence Package
-7. Disclosure Boundary
-8. Claim Ceiling
-9. Contact / Citation
-
-### Phase 3 — Add Public Evidence Package Page or Section
-
-Add a section or page named `Public Evidence Package`.
-
-Required content:
-
-- What can be shared
-- What is withheld
-- How public records should be cited
-- What evidence level each asset supports
-- How to use the materials for external review
-- Claim ceiling
-
-Do not include private task packs, prompt chains, hidden gates, or raw logs.
-
-### Phase 4 — Add Validation Gate Page or Section
-
-Add a section or page named `Validation Gate`.
-
-Required content:
-
-- Current evidence
-- Missing external validation
-- Pilot design
-- Rater protocol
-- Minimum reproducible subset
-- Report output
-- Acceptance criteria
-
-Canonical gate:
-
-```text
-N ≥ 20 real-model multi-turn pilot
-2–3 external raters
-blinded scoring
-public-safe benchmark subset
-updated technical report
+```bash
+python scripts/build_site.py
+python scripts/build_site.py --check
 ```
 
-### Phase 5 — Add Lightweight Site QA
+Expected check output:
 
-Add or update only low-risk tooling:
+```text
+PASS: generated site sections are current.
+```
 
-- Keep `scripts/validate_site_data.py`.
-- Optionally add `scripts/check_site_links.py`.
-- Optionally add `.github/workflows/site-check.yml` only after local validation passes.
+Generated sections:
 
-Do not add deployment secrets or external service credentials.
+- `PUBLIC_RECORDS`
+- `SYSTEM_MAP`
 
-### Phase 6 — Final Test
+### Phase 3: Public Evidence Package
+
+The public portal must include `section id="evidence-package"` with:
+
+- What is public
+- What is withheld
+- Evidence levels
+- How to cite
+- How to review
+- Reproducible subset
+- Claim ceiling
+
+The evidence note must be linked as:
+
+```text
+evidence/full1000-pilot-note.html
+```
+
+### Phase 4: Calibration-First Validation Gate
+
+The next validation gate is calibration-first:
+
+- freeze a public-safe BRC coding manual and rule version
+- preserve complete item-level scoring evidence and evidence spans
+- document final-label rules and gate reasons
+- retest BRC-1 / BRC-6 / BRC-7 boundary cases
+- inspect rare BRC-2 / BRC-3 / BRC-5 samples
+- run a limited blinded scoring check
+- publish a small reproducible subset only after calibration issues are resolved
+
+Do not present peer-review, benchmark, production, or manuscript-status claims without current authorized evidence.
+
+### Phase 5: Site QA
 
 Run:
 
 ```bash
 python scripts/validate_site_data.py
+python scripts/build_site.py --check
+python scripts/check_records_parity.py
+python scripts/check_site_links.py
+python scripts/check_public_boundary.py
 ```
 
-If a link checker is added:
+Expected outputs:
+
+```text
+PASS: site data files are valid.
+PASS: generated site sections are current.
+PASS: index public record block matches data/records.json.
+PASS: all local site links resolve.
+PASS: public boundary checks passed.
+```
+
+Also run:
 
 ```bash
-python scripts/check_site_links.py
+git diff --check
 ```
-
-Manual checks:
-
-- Page renders locally.
-- Mobile width works.
-- Navigation anchors work.
-- No private details leaked.
-- Claim ceiling remains conservative.
-- Submission language does not imply acceptance.
-- Zenodo records are described as timestamped public deposits; no peer-review implication.
-
----
 
 ## Done Definition
 
-Deliver a final report with:
+Do not mark complete unless all of the following pass:
 
-1. Files changed
-2. Validation commands and outputs
-3. Public/private boundary check result
-4. Any unresolved limitations
-5. Next single action
+1. `python scripts/validate_site_data.py`
+2. `python scripts/build_site.py --check`
+3. `python scripts/check_records_parity.py`
+4. `python scripts/check_site_links.py`
+5. `python scripts/check_public_boundary.py`
+6. `git diff --check`
+7. no stale manuscript claims in public files
+8. no private component identifiers in public files
+9. no local/private paths in public files
+10. live GitHub Pages validation after merge
 
-Do not mark complete unless `scripts/validate_site_data.py` passes.
-
----
-
-## Recommended Commit Message
+## Recommended Commit Messages
 
 ```text
-Upgrade GitHub Pages research portal foundation
+Finalize canonical public data and boundary validation
+Add public site integrity checks
 ```
-
----
 
 ## Handoff Summary
 
-This task should convert the existing page from a static self-description into a maintainable public research portal:
+The endpoint is a static, public-safe research portal:
 
 ```text
 GitHub Pages homepage
-→ public record index
-→ research stack map
-→ evidence package
-→ validation gate
-→ conservative claim boundary
+-> canonical public records
+-> public-safe system map
+-> evidence package
+-> calibration-first validation gate
+-> conservative claim boundary
 ```
 
-The endpoint is not visual complexity. The endpoint is external readability, citation readiness, and public-safe validation discipline.
+The endpoint is not visual complexity. The endpoint is external readability, citation readiness, build reproducibility, and public-safe validation discipline.

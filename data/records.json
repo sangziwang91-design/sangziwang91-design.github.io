@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "last_structural_update": "2026-06-17",
-  "claim_ceiling": "Public records are timestamped public deposits or submitted manuscripts as stated. Zenodo records are not peer-review endorsements unless explicitly stated. Runtime and intervention claims remain limited to restricted-access behavioral observability and sandbox-level validation unless independently validated.",
+  "last_structural_update": "2026-06-19",
+  "claim_ceiling": "Public records are timestamped public deposits as stated. Zenodo records are not peer-review endorsements unless explicitly stated. Runtime and intervention claims remain limited to restricted-access behavioral observability and sandbox-level validation unless independently validated.",
   "public_records": [
     {
       "id": "ec-epc-2026",
@@ -114,14 +114,6 @@
       "claim_level": "dataset / not a model-ranking benchmark"
     }
   ],
-  "manuscripts": [
-    {
-      "id": "testing-as-environment-cacm-submission",
-      "title": "Testing as Environment: How Evaluation Protocols Shape the Behavior They Measure in Large Language Models",
-      "status": "submitted / under review as represented on current site",
-      "venue": "Communications of the ACM (CACM)",
-      "public_note": "No acceptance, endorsement, or peer-review result is implied unless explicitly updated.",
-      "claim_level": "under-review manuscript; citation and status language must remain conservative"
-    }
-  ]
+  "manuscript_status_policy": "No manuscript status is displayed unless the status is current, explicitly authorized for public display, and dated.",
+  "manuscripts": []
 }

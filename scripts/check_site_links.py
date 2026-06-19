@@ -49,7 +49,7 @@ def target_for(path: Path, href_path: str) -> Path:
     try:
         target.relative_to(ROOT)
     except ValueError as exc:
-        raise AssertionError(f"{path.name}: local link escapes site root: {href_path}") from exc
+        raise AssertionError(f"{path.relative_to(ROOT)}: local link escapes site root: {href_path}") from exc
     if target.is_dir():
         target = target / "index.html"
     return target
@@ -62,25 +62,29 @@ def check_anchor(target: Path, anchor: str, label: str) -> None:
         raise AssertionError(f"{label}: missing anchor #{anchor} in {target.relative_to(ROOT)}")
 
 
+def html_files() -> list[Path]:
+    return sorted(path for path in ROOT.rglob("*.html") if ".git" not in path.parts)
+
+
 def main() -> int:
     try:
-        html_files = sorted(ROOT.glob("*.html"))
-        for path in html_files:
+        for path in html_files():
             text = path.read_text(encoding="utf-8")
+            rel = path.relative_to(ROOT)
             if FORBIDDEN_RE.search(text):
-                raise AssertionError(f"{path.name}: forbidden local/private path pattern found")
+                raise AssertionError(f"{rel}: forbidden local/private path pattern found")
 
             parser = parse_html(path)
             for href in parser.hrefs:
                 if not href.strip():
-                    raise AssertionError(f"{path.name}: empty href")
+                    raise AssertionError(f"{rel}: empty href")
                 if FORBIDDEN_RE.search(href):
-                    raise AssertionError(f"{path.name}: forbidden href: {href}")
+                    raise AssertionError(f"{rel}: forbidden href: {href}")
 
                 parsed = urlparse(href)
                 if parsed.scheme in ("http", "https"):
                     if parsed.netloc == "doi.org" and not DOI_URL_RE.match(href):
-                        raise AssertionError(f"{path.name}: malformed DOI link: {href}")
+                        raise AssertionError(f"{rel}: malformed DOI link: {href}")
                     continue
                 if parsed.scheme in ("mailto", "tel"):
                     continue
@@ -90,19 +94,18 @@ def main() -> int:
 
                 if not href_path:
                     if not anchor:
-                        raise AssertionError(f"{path.name}: empty local anchor href")
-                    check_anchor(path, anchor, path.name)
+                        raise AssertionError(f"{rel}: empty local anchor href")
+                    check_anchor(path, anchor, str(rel))
                     continue
 
                 target = target_for(path, href_path)
                 if target.suffix in (".html", ".md") or href_path in (".", "./"):
                     if not target.exists():
-                        raise AssertionError(f"{path.name}: missing local link target: {href}")
+                        raise AssertionError(f"{rel}: missing local link target: {href}")
                     if anchor and target.suffix == ".html":
-                        check_anchor(target, anchor, f"{path.name} -> {href}")
-                elif target.suffix:
-                    if not target.exists():
-                        raise AssertionError(f"{path.name}: missing local asset: {href}")
+                        check_anchor(target, anchor, f"{rel} -> {href}")
+                elif target.suffix and not target.exists():
+                    raise AssertionError(f"{rel}: missing local asset: {href}")
 
     except Exception as exc:
         print(f"FAIL: {exc}", file=sys.stderr)

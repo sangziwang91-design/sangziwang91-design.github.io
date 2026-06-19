@@ -9,23 +9,56 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+PUBLIC_FILES = [
+    ROOT / "index.html",
+    ROOT / "reality-check.html",
+    ROOT / "cards.html",
+    ROOT / "article-ai-projects-die.html",
+    ROOT / "evidence" / "full1000-pilot-note.md",
+    ROOT / "evidence" / "full1000-pilot-note.html",
+    ROOT / "data" / "records.json",
+    ROOT / "data" / "systems.json",
+]
+
 FORBIDDEN_PATTERNS = [
+    "CACM",
+    "submitted / under review",
+    "under-review manuscript",
+    "accepted by CACM",
     "validated benchmark",
     "peer-reviewed standard",
-    "accepted by CACM",
     "alignment solution",
+    "regulatory-grade",
     "production-grade benchmark",
-    "regulatory-grade standard",
     "file://",
     "localhost",
     "D:/",
     "C:/",
     "/mnt/data",
+    "private workspace link",
+    "raw private logs",
+    "raw private log",
+    "hidden scoring weights",
+    "exact operational trigger",
+    "private routing logic",
+    "full private task bank",
+    "private task packs",
+    "intervention templates",
 ]
 
-PRIVATE_CORE_TERMS = [
+PRIVATE_COMPONENT_TERMS = [
     "SignalBus",
     "CandidatePool",
+    "MST",
+    "VB3",
+    "IGS",
+    "GVOS",
+    "IFCE",
+    "IDFS",
+    "GDS-5",
+    "GEO-RECYCLE",
+    "GLOBAL-VECTOR",
+    "Seed System",
     "private Notion architecture",
     "full coupling",
     "perturbation sequences",
@@ -37,6 +70,7 @@ BOUNDARY_MARKERS = [
     "不是商业审计",
     "claim ceiling",
     "边界声明",
+    "withheld",
 ]
 
 
@@ -50,29 +84,28 @@ def has_boundary_language(text: str) -> bool:
     return any(marker.lower() in lowered for marker in BOUNDARY_MARKERS)
 
 
+def assert_absent(text: str, patterns: list[str], label: str) -> None:
+    lowered = text.lower()
+    for pattern in patterns:
+        if pattern.lower() in lowered:
+            raise AssertionError(f"{label}: forbidden public pattern found: {pattern}")
+
+
 def main() -> int:
     try:
         index = (ROOT / "index.html").read_text(encoding="utf-8")
         require(index, "Claim Ceiling", "index.html")
         require(index, "Disclosure Boundary", "index.html")
         require(index, "Next Research Gate", "index.html")
+        require(index, 'id="evidence-package"', "index.html")
 
-        all_public_files = [
-            ROOT / "index.html",
-            ROOT / "reality-check.html",
-            ROOT / "article-ai-projects-die.html",
-            ROOT / "cards.html",
-        ]
-        for path in all_public_files:
+        for path in PUBLIC_FILES:
+            if not path.exists():
+                raise AssertionError(f"missing public file: {path.relative_to(ROOT)}")
             text = path.read_text(encoding="utf-8")
-            lowered = text.lower()
-            for pattern in FORBIDDEN_PATTERNS:
-                if pattern.lower() in lowered:
-                    raise AssertionError(f"{path.name}: forbidden public pattern found: {pattern}")
-
-        for term in PRIVATE_CORE_TERMS:
-            if re.search(re.escape(term), index, re.IGNORECASE):
-                raise AssertionError(f"index.html: overly specific private-core term remains: {term}")
+            label = str(path.relative_to(ROOT))
+            assert_absent(text, FORBIDDEN_PATTERNS, label)
+            assert_absent(text, PRIVATE_COMPONENT_TERMS, label)
 
         for name in ("reality-check.html", "article-ai-projects-die.html", "cards.html"):
             text = (ROOT / name).read_text(encoding="utf-8")
